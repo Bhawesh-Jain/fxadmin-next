@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import Nav from "../ui/nav/nav";
+import { getSession } from "@/libs/actions";
+import { redirect } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,7 +11,13 @@ export const metadata = {
   description: "",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getSession()
+
+  if (!session.isLoggedIn) {
+    redirect('/login');
+  } 
+
   return (
     <html lang="en">
       <body className={inter.className}>

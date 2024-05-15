@@ -2,6 +2,7 @@
 import * as icons from "react-icons/md"
 import MenuItem from "./menuItem/menuitem"
 import Logo from "../../logo/logo"
+import LogoutForm from "../../logout/LogoutForm"
 
 const Sidebar = ({openMenu = false, setOpenMenu}) => {
     const list = [
@@ -60,9 +61,7 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
                 ))
             }
 
-            <button className={`${"flex flex-row items-center gap-4 rounded-md px-2 py-4 hover:bg-gray-600 m-2"}`}>
-                <icons.MdLogout size={20} /> Logout
-            </button>
+            <LogoutForm />
 
         </div>
     )
