@@ -1,7 +1,7 @@
 "use client"
-import Logo from "../logo/logo"
 import * as icons from "react-icons/md"
 import MenuItem from "./menuItem/menuitem"
+import Logo from "../../logo/logo"
 
 const Sidebar = ({openMenu = false, setOpenMenu}) => {
     const list = [
@@ -16,9 +16,9 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
             link: "/transactions"
         },
         {
-            title: "Trades",
-            icon: icons.MdHistory,
-            link: "/trades"
+            title: "Withdraw",
+            icon: icons.MdMoneyOffCsred,
+            link: "/withdraw"
         },
         {
             title: "Contact Us",
@@ -26,9 +26,19 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
             link: "/contact"
         },
         {
-            title: "Loan",
-            icon: icons.MdGridView,
-            link: "/loan"
+            title: "Services",
+            icon: icons.MdRoomService,
+            link: "/service"
+        },
+        {
+            title: "About Us",
+            icon: icons.MdInfo,
+            link: "/about"
+        },
+        {
+            title: "Terms & Conditions",
+            icon: icons.MdPanoramaPhotosphereSelect,
+            link: "/terms"
         }
 
     ]
@@ -38,7 +48,7 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
     }
 
     return (
-        <div className={` ${"fixed top-0 md:flex flex-col h-screen bg-gray-800 w-64 z-40 text-white "} ${!openMenu && "hidden"}`}>
+        <div className={` ${"fixed top-0 md:flex flex-col h-screen bg-gray-800 w-64 z-40 text-white overflow-y-auto"} ${!openMenu && "hidden"}`}>
             <div className="p-4 flex flex-row items-center justify-between">
                 <Logo />
                 <icons.MdArrowBack size={20} onClick={handleBackClick} className="md:hidden filter fill-white"/>
@@ -46,7 +56,7 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
 
             {
                 list.map(item => (
-                    <MenuItem item={item} />
+                    <MenuItem key={item.title} item={item} />
                 ))
             }
 

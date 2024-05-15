@@ -1,8 +1,8 @@
 "use client"
 import { useState } from "react";
-import Sidebar from "../sidebar/sidebar";
-import Logo from "../logo/logo";
 import { MdMenu } from "react-icons/md";
+import Sidebar from "./sidebar/sidebar";
+import Logo from "../logo/logo";
 
 const Nav = () => {
     const [openMenu, setOpenMenu] = useState(false)
