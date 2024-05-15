@@ -3,9 +3,9 @@ import PrimaryBtn from "../Skeleton/PrimaryBtn/PrimaryBtn";
 
 const Transaction = ({ item }) => {
    return (
-      <div className="w-full py-2 text-xs border-b-2 border-gray-100 flex flex-col">
+      <div className="w-full py-2 text-xs border-b-2 border-gray-100 flex flex-col lg:flex-row  lg:gap-20 justify-between">
 
-         <div className="flex flex-row justify-between">
+         <div className="flex flex-row justify-between w-full">
 
             <div className="flex flex-col justify-around w-full md:w-auto px-2">
                <div>
@@ -28,10 +28,10 @@ const Transaction = ({ item }) => {
 
          </div>
 
-         <div className="flex flex-row justify-evenly gap-3 items-center text-sm ">
+         <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
             <div className="hidden w-1/4"></div>
-            <PrimaryBtn text="Accept" color="green" width="1/4" />
-            <PrimaryBtn text="Reject" color="red" width="1/4"/>
+            <PrimaryBtn text="Accept" color="green" width="full" />
+            <PrimaryBtn text="Reject" color="red" width="full"/>
          </div>
 
       </div>
