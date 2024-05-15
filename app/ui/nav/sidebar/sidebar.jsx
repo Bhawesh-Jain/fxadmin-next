@@ -8,37 +8,37 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
         {
             title: "Dashboard",
             icon: icons.MdDashboard,
-            link: "/"
+            link: "/dashboard"
         },
         {
             title: "Transactions",
             icon: icons.MdMoney,
-            link: "/transactions"
+            link: "/dashboard/transactions"
         },
         {
             title: "Withdraw",
             icon: icons.MdMoneyOffCsred,
-            link: "/withdraw"
+            link: "/dashboard/withdraw"
         },
         {
             title: "Contact Us",
             icon: icons.MdSupervisedUserCircle,
-            link: "/contact"
+            link: "/dashboard/contact"
         },
         {
             title: "Services",
             icon: icons.MdRoomService,
-            link: "/service"
+            link: "/dashboard/service"
         },
         {
             title: "About Us",
             icon: icons.MdInfo,
-            link: "/about"
+            link: "/dashboard/about"
         },
         {
             title: "Terms & Conditions",
             icon: icons.MdPanoramaPhotosphereSelect,
-            link: "/terms"
+            link: "/dashboard/terms"
         }
 
     ]

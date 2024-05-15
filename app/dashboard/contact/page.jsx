@@ -1,4 +1,4 @@
-import ContactUsItem from "../ui/contact/contactUsItem"
+import ContactUsItem from "@/app/ui/contact/contactUsItem"
 
 const Contact = () => {
     return (

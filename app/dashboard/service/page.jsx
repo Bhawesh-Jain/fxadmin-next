@@ -1,4 +1,4 @@
-import ServiceItem from "../ui/Service/serviceItem"
+import ServiceItem from "@/app/ui/Service/serviceItem"
 
 const Services = () => {
     return (
