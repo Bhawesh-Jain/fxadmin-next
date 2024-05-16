@@ -7,6 +7,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 const Services = async () => {
     const res = await fetch(`${baseUrl}/api/dashboard/service`, {
         method: "GET",
+        cache: "no-store",
         headers: {
             "Content-type": "application/json"
         }
@@ -26,7 +27,7 @@ const Services = async () => {
 
             <Link href="../dashboard/service/add"><PrimaryBtn color={"blue"} text={"Add New"} /></Link>
 
-            <div className="grid grid-cols-2 items-center overflow-y-auto w-full">
+            <div className="grid grid-cols-2 items-center overflow-y-auto w-full mt-5">
                 {
                     list.map(item => (
                         <ServiceItem key={item._id} item={item} />
