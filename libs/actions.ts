@@ -3,7 +3,6 @@ import { sessionOptions, SessionData, defaultSession } from "@/libs/schema"
 import { getIronSession } from "iron-session"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { fetchAdminUser } from "./data"
 
 export const getSession = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -22,13 +21,6 @@ export const login = async (
   const formEmail = formData.get("email") as string
   const formPassword = formData.get("password") as string
   const formRemember = formData.get("remember")
-
-  if (formEmail.length < 4) {
-    return { error: "Wrong Credentials!" }
-  }
-
-  // await fetchAdminUser(formEmail, formPassword);
-    
 
   if (formRemember) {
     session.remember = true

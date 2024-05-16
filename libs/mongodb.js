@@ -1,18 +1,14 @@
-import mongoose from "mongoose";
-import Error from "next/error";
+import mongoose from 'mongoose';
 
-export const connectMongoDB = async () => {
-  const connection = {}
-  
+const connectMongoDb = async () => {
   try {
-    if(connection.isConnected) return;
-    const db = await mongoose.connect(process.env.ATLAS_URI);
-
-    connection.isConnected = db.connections[0].readyState;
-    
+    console.log(process.env.ATLAS_URI);
+    await mongoose.connect(process.env.ATLAS_URI)
+      .catch(error => console.log(error));
     console.log("Connected to db");
   } catch (error) {
     console.log(error);
-    throw new Error(error);
   }
 }
+
+export default connectMongoDb
