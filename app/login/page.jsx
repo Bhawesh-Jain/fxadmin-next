@@ -1,6 +1,7 @@
 "use client"
 
 import { login } from "@/libs/actions"
+import Error from "next/error"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { useState } from "react"
@@ -43,7 +44,7 @@ const Login = () => {
       }
 
     } catch (error) {
-      
+      throw new Error(error)
     }
   }
 
