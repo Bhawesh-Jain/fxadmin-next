@@ -14,27 +14,19 @@ export const getSession = async () => {
   return session;
 }
 export const login = async (
-  formData: FormData
+  body: JSON
 ) => {
   const session = await getSession();
 
-  const formEmail = formData.get("email") as string
-  const formPassword = formData.get("password") as string
-  const formRemember = formData.get("remember")
+  const formEmail = body["email"] as string
+  const id = body["_id"] as string
 
-  if (formRemember) {
-    session.remember = true
-  } else {
-    session.remember = false
-  }
+  session.remember = true
 
   session.isLoggedIn = true;
-  session.userId = "1";
-  session.userName = "Test";
-
-  console.log(session);
-
-
+  session.userId = id;
+  session.userName = formEmail;
+  
   await session.save()
 
   redirect("/dashboard")

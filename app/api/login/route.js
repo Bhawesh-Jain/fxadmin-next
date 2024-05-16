@@ -7,7 +7,18 @@ export async function POST(request) {
 
   await connectMongoDb();
 
-  await Admin.create({email, password})
+  const user = await Admin.findOne({email:email, password:password})
 
-  return NextResponse.json({message: "Login"}, {status: 201})
+  var message = "Invalid User"
+  var status = false
+  var data 
+  if (user) {
+    message = "Login Successful"
+    status = true
+    data = user.toObject()
+
+    delete data["password"];
+  }
+
+  return NextResponse.json({status: status, message: message, data: data}, {status: 200})
 }
