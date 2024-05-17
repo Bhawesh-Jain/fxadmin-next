@@ -19,3 +19,13 @@ export async function GET() {
     
     return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
 }
+
+
+export async function DELETE(request) {
+    const id = request.nextUrl.searchParams.get("id")
+
+    await connectMongoDb();
+    await User.findByIdAndDelete(id);
+
+    return NextResponse.json({status: true, message: "User Deleted"}, {status: 200});
+}

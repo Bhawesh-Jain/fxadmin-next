@@ -22,3 +22,25 @@ export async function GET(request, {params}) {
     return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
 
 }
+
+
+export async function PUT(request, {params}) {
+    const {id} = params
+    const req = await request.json();
+
+    await connectMongoDb()
+
+
+    var message = "Request Failed"
+    var status = false
+
+    var data = await User.findByIdAndUpdate(id, req);
+
+    if (data) {
+        message = "User Updated"
+        status = true
+    }
+
+    return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+
+}
