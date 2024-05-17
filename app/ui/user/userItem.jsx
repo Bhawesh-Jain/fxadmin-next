@@ -38,7 +38,7 @@ const UserItem = ({ item }) => {
                     Delete
                 </button>
                 <RedirectBtn link={`./dashboard/user/transactions/${item._id}`} color="blue-500" text="Transactions" width="" />
-                <PrimaryBtn color="red" text="Trades" width="" />
+                <RedirectBtn link={`./dashboard/user/trade/${item._id}`} color="red-500" text="Trades" width="" />
                 <PrimaryBtn color="green" text="Investement" width="" />
             </div>
         </div>

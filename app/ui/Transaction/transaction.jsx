@@ -1,6 +1,5 @@
 "use client"
 import { MdCallReceived } from "react-icons/md";
-import PrimaryBtn from "../Skeleton/PrimaryBtn/PrimaryBtn";
 import { useRouter } from "next/navigation";
 import RedirectBtn from "../Skeleton/RedirectBtn/RedirectBtn";
 

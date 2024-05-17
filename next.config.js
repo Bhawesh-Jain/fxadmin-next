@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  i18n: {
+    locales: ['en-IN'], // Specify the locales supported by your application
+    defaultLocale: 'en-IN', // Set the default locale to India (English)
+  },
   env: {
     ATLAS_URI: process.env.ATLAS_URI,
   },
@@ -14,6 +18,7 @@ module.exports = {
     config.experiments = {
       layers: true,
     };
+    
 
     return config;
   },
