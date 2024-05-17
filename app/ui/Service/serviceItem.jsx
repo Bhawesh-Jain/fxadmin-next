@@ -1,8 +1,8 @@
 "use client"
 import { useRouter } from "next/navigation";
-import PrimaryBtn from "../Skeleton/PrimaryBtn/PrimaryBtn";
 import Link from "next/link";
 // import SavedIcon from "../savedIcon/SavedIcon";
+
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
 const ServiceItem = ({ item }) => {

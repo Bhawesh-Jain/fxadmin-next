@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
-const adminUserSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-    },
     email: {
       type: String,
       required: true
@@ -12,10 +9,27 @@ const adminUserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-    }
+    },
+    name: String,
+    phone: String,
+    aadharNo: String,
+    panNo: String,
+    gender: String,
+    dob: String,
+    bankName: String,
+    accountNumber: String,
+    accountHolder: String,
+    ifscCode: String,
+    address: String,
+    nomineeName: String,
+    nomineeRelation: String,
+    status: {
+      type: String,
+      default: "Pending"
+    },
   }, { timestamps: true }
 )
 
-const Admin = mongoose.models.Admin || mongoose.model("Admin", adminUserSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-export default Admin;
+export default User;

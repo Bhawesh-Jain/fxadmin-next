@@ -1,33 +1,36 @@
 // "use client"
-// import React from 'react';
 
-// // Function to dynamically import the icon component
-// const importIconComponent = async (library, iconName) => {
-//   try {
-//     const { default: IconComponent } = await import(`react-icons/${library}/${iconName}`);
-//     return IconComponent;
-//   } catch (error) {
-//     console.error('Error importing icon component:', error);
-//     return null;
-//   }
+
+// import { useEffect, useState } from "react";
+
+
+
+// const getIconComponent = async (library, iconName) => {
+//     const module = await import(`react-icons/${library}`);
+//     return module[iconName];
 // };
 
-// const SavedIcon = ({ library, iconName }) => {
-//   const [IconComponent, setIconComponent] = React.useState(null);
+// const DisplayIcon = ({ iconName, library }) => {
+//     const [IconComponent, setIconComponent] = useState(null);
 
-//   React.useEffect(() => {
-//     const fetchIconComponent = async () => {
-//       const iconComponent = await importIconComponent(library, iconName);
-//       setIconComponent(iconComponent);
-//     };
 
-//     fetchIconComponent();
-//   }, [library, iconName]);
+//     useEffect(() => {
+//         if (iconName) {
+//             getIconComponent(iconName, library)
+//                 .then((Icon) => {
+//                     setIconComponent(() => Icon);
+//                 })
+//                 .catch(error => {
+//                     console.error('Error loading icon component:', error);
+//                 });
+//         }
+//     }, []);
 
-//   if (!IconComponent) {
-//     return <div>Error: Icon component not found.</div>; // or handle error
-//   }
-
-//   return <IconComponent />;
+//     return (
+//         <div>
+//             {IconComponent ? <IconComponent /> : 'Loading icon...'}
+//         </div>
+//     );
 // };
-// export default SavedIcon;
+
+// export default DisplayIcon;

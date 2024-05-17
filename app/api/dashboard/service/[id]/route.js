@@ -1,5 +1,6 @@
 import connectMongoDb from "@/libs/mongodb"
 import Service from "@/models/service"
+import { NextResponse } from "next/server"
 
 export async function PUT(request, {params}) {
     const {id} = params
@@ -21,9 +22,8 @@ export async function PUT(request, {params}) {
 
 }
 
-export async function GET({params}) {
-    console.log("test:" + params);
-    // const {id} = params
+export async function GET(request, {params}) {
+    const {id} = params
 
     await connectMongoDb()
 

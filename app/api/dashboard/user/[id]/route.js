@@ -2,20 +2,23 @@ import connectMongoDb from "@/libs/mongodb";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-    await connectMongoDb();
+
+
+export async function GET(request, {params}) {
+    const {id} = params
+
+    await connectMongoDb()
 
     var message = "Request Failed"
     var status = false
-    var data
 
-    const req = await User.find();
+    var data = await User.findById(id);
 
-    if (req) {
-        message = "Users Found"
+    if (data) {
+        message = "Found User"
         status = true
-        data = req
     }
-    
+
     return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+
 }
