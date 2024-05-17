@@ -88,7 +88,7 @@ const Transaction = ({ item, id }) => {
 
          </div>
 
-         {item.status === "Pending" &&
+         {item.status === "PENDING" &&
             <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
                <button onClick={handleAccept} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-green-500`}>
                   Accept
@@ -99,7 +99,7 @@ const Transaction = ({ item, id }) => {
             </div>
          }
 
-         {item.status !== "Pending" &&
+         {item.status !== "PENDING" &&
             <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
                <div className="hidden w-1/4"></div>
                <RedirectBtn link={`/dashboard/transactions/${item._id}`} text="Edit" color="blue-500" width="full" />
