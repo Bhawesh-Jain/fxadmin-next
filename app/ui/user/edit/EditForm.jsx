@@ -101,7 +101,7 @@ const UserEditForm = ({ item }) => {
 
     return (
         <section className="py-10">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-3/4 lg:py-0 ">
+            <div className="flex flex-col items-center justify-center px-2 py-8 mx-auto lg:py-0 ">
                 <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-screen-lg xl:p-0 ">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         {errorMsg && errorMsg.length > 0 && <p className="text-base font-medium text-red-500">{errorMsg}</p> }

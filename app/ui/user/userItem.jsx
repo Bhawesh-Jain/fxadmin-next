@@ -31,12 +31,13 @@ const UserItem = ({ item }) => {
 
             <div className="grid grid-cols-2 lg:grid-cols-3 text-sm items-center justify-around gap-5 mt-4">
                 <div className="hidden bg-green-500 "></div>
+                <div className="hidden bg-blue-500 "></div>
                 <RedirectBtn link={`./dashboard/user/edit/${item._id}`} color="green-500" text="View" width="" />
                 <PrimaryBtn color="blue" text="Add loan" width="" />
                 <button onClick={handleDelete} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} bg-red-500`}>
                     Delete
                 </button>
-                <PrimaryBtn color="blue" text="Transactions" width="" />
+                <RedirectBtn link={`./dashboard/user/transactions/${item._id}`} color="blue-500" text="Transactions" width="" />
                 <PrimaryBtn color="red" text="Trades" width="" />
                 <PrimaryBtn color="green" text="Investement" width="" />
             </div>
