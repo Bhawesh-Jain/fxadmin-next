@@ -2,6 +2,7 @@
 import { MdCallReceived } from "react-icons/md";
 import PrimaryBtn from "../Skeleton/PrimaryBtn/PrimaryBtn";
 import { useRouter } from "next/navigation";
+import RedirectBtn from "../Skeleton/RedirectBtn/RedirectBtn";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
@@ -101,7 +102,7 @@ const Transaction = ({ item, id }) => {
          {item.status !== "Pending" &&
             <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
                <div className="hidden w-1/4"></div>
-               <PrimaryBtn text="Edit" color="blue" width="full" />
+               <RedirectBtn link={`/dashboard/transactions/${item._id}`} text="Edit" color="blue-500" width="full" />
                <button onClick={handleDelete} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
                Delete
                </button>

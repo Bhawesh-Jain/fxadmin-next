@@ -9,7 +9,7 @@ const transactionSchema = new mongoose.Schema(
     transactionId: String,
     status: {
       type: String,
-      default: "Pending"
+      default: "PENDING"
     },
   }, { timestamps: true }
 )

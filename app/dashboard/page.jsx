@@ -23,7 +23,6 @@ export default async function Home() {
   return (
     <div className="flex flex-col items-center px-2">
       <h2 className="text-2xl font-bold my-5">Dashboard</h2>
-
       {
         list.map(item => (
           <UserItem key={item._id} item={item} />
