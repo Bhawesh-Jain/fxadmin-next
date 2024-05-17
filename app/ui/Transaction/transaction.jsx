@@ -79,7 +79,7 @@ const Transaction = ({ item, id }) => {
                </div>
             </div>
 
-            <div className="flex flex-col justify-end items-end">
+            <div className="flex flex-col justify-end items-end z-20">
                <span className="text-center md:text-start">Transaction Amount:<p className="font-medium text-center m-1">{item.amount}</p></span>
                <span className={`m-auto mx-auto bg-blue-500 rounded-lg ${item.type === "Paid" && "rotate-180"}`}>
                   <MdCallReceived size={60} className="filter p-4 fill-white" />
