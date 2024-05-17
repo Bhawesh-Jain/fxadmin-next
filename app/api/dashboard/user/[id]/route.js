@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 
 
 
-export async function GET(request, {params}) {
-    const {id} = params
+export async function GET(request, { params }) {
+    const { id } = params
 
     await connectMongoDb()
 
@@ -24,23 +24,31 @@ export async function GET(request, {params}) {
 }
 
 
-export async function PUT(request, {params}) {
-    const {id} = params
+export async function PUT(request, { params }) {
+    const { id } = params
     const req = await request.json();
 
     await connectMongoDb()
 
-
     var message = "Request Failed"
     var status = false
 
-    var data = await User.findByIdAndUpdate(id, req);
+    try {
 
-    if (data) {
-        message = "User Updated"
-        status = true
+        var data = await User.findByIdAndUpdate(id, req)
+            .catch(error => message = error);
+        if (data) {
+            message = "User Updated"
+            status = true
+        }
+        return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+
+    } catch (error) {
+        var message = error
+
     }
 
-    return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+    return NextResponse.json({ status: status, message: message }, { status: 200 })
+
 
 }

@@ -1,10 +1,12 @@
 import connectMongoDb from "@/libs/mongodb";
-import Trade from "@/models/Trade";
+import Order from "@/models/Order";
 import { NextResponse } from "next/server";
 
 
 export async function POST(request) {
     const res = await request.json();
+
+    console.log(res);
 
     await connectMongoDb();
 
@@ -12,7 +14,30 @@ export async function POST(request) {
     var status = false
     var data
 
-    const req = await Trade.create(res);
+    const req = await Order.create(res);
+
+    if (req) {
+        message = "Created Trade"
+        status = true
+        data = req
+    }
+    
+    return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+}
+
+export async function PUT(request) {
+    const id = request.nextUrl.searchParams.get("id")
+    const res = await request.json();
+
+    console.log(id);
+
+    await connectMongoDb();
+
+    var message = "Request Failed"
+    var status = false
+    var data
+
+    const req = await Order.findByIdAndUpdate(id, res);
 
     if (req) {
         message = "Created Trade"
@@ -24,7 +49,7 @@ export async function POST(request) {
 }
 
 
-export async function GET(request, {params}) {
+export async function GET(request) {
     const id = request.nextUrl.searchParams.get("id")
 
     await connectMongoDb()
@@ -32,7 +57,7 @@ export async function GET(request, {params}) {
     var message = "Request Failed"
     var status = false
 
-    var data = await Trade.findById(id);
+    var data = await Order.find({userId: id});
 
     if (data) {
         message = "Found Trade"
@@ -42,3 +67,26 @@ export async function GET(request, {params}) {
     return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
 
 }
+
+
+export async function DELETE(request) {
+    const id = request.nextUrl.searchParams.get("id")
+  
+    await connectMongoDb()
+  
+    console.log(id);
+  
+  
+    var message = "Request Failed"
+    var status = false
+  
+    var data = await Order.findByIdAndDelete(id);
+  
+    if (data) {
+        message = "Trade Deleted"
+        status = true
+    }
+  
+    return NextResponse.json({ status: status, message: message }, { status: 200 })
+  
+  }

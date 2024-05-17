@@ -1,25 +1,50 @@
 "use client"
-import RedirectBtn from "@/app/ui/Skeleton/RedirectBtn/RedirectBtn"
+
 import AddTradeModal from "@/app/ui/user/trade/addTradeModal/addTradeModal"
+import EditTradeModal from "@/app/ui/user/trade/editTradeModal/editTradeModal"
 import TradeItem from "@/app/ui/user/trade/tradeItem"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
 
-const AddTrade = () => {
+const AddTrade = ({ params }) => {
+
+    const { id } = params
 
     const [List, setList] = useState([]);
     const [addModal, setAddModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [currentItem, setCurrentItem] = useState();
+    const [refresh, setRefresh] = useState(false);
+
+    useEffect(() => {
+        fetchList()
+    }, []);
+
+    useEffect(() => {
+        fetchList()
+    }, [addModal]);
+
+    useEffect(() => {
+        fetchList()
+    }, [editModal]);
+
+    useEffect(() => {
+        fetchList()
+        setRefresh(false)
+    }, [refresh]);
 
     const fetchList = async () => {
-        const res = await fetch(`${baseUrl}/api/dashboard/user`, {
+        const res = await fetch(`${baseUrl}/api/dashboard/user/trade?id=${id}`, {
             method: "GET",
             cache: "no-cache"
         });
 
         if (res.ok) {
             const body = await res.json();
+
+            setList(body.data)
         }
     }
 
@@ -66,24 +91,17 @@ const AddTrade = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {
-                            list.map(item => (
-
-                                <TradeItem />
+                        {List.length > 0 &&
+                            List.map(item => (
+                                <TradeItem key={item._id} setCurrentItem={setCurrentItem} setEditModal={setEditModal} setRefresh={setRefresh} item={item} />
                             ))
-                        } */}
-
-
-                        <TradeItem />
-                        <TradeItem />
-                        <TradeItem />
-                        <TradeItem />
-                        <TradeItem />
+                        }
                     </tbody>
                 </table>
             </div>
 
-            {addModal && <AddTradeModal setModalVis={setAddModal} />}
+            {addModal && <AddTradeModal userId={id} setModalVis={setAddModal} />}
+            {editModal && <EditTradeModal item={currentItem} setModalVis={setEditModal} />}
         </div>
     )
 }

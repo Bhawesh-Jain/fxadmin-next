@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const tradeSchema = new mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
   {
     date: {
       type: String,
@@ -26,10 +26,12 @@ const tradeSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    userId: String,
+    userId: {
+      type: String
+    },
   }, { timestamps: true }
 )
 
-const Trade = mongoose.models.Trade || mongoose.model("Trade", tradeSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", OrderSchema);
 
-export default Trade;
+export default Order;

@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
-const AddTradeModal = ({ setModalVis }) => {
+const AddTradeModal = ({ userId, setModalVis }) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -22,6 +22,7 @@ const AddTradeModal = ({ setModalVis }) => {
     const formData = new FormData(event.target);
 
     const rawFormData = {
+      userId: userId,
       amount: formData.get('amount'),
       buy: formData.get('buy'),
       quantity: formData.get('quantity'),
@@ -32,25 +33,26 @@ const AddTradeModal = ({ setModalVis }) => {
 
     try {
       const res = await fetch(`${baseUrl}/api/dashboard/user/trade`, {
-          method: "POST",
-          headers: {
-              "Content-type": "application/json"
-          },
-          body: JSON.stringify(rawFormData),
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(rawFormData),
       });
 
       console.log(res);
       if (res.ok) {
-          const body = await res.json();
+        const body = await res.json();
 
-          setErrorMsg(body.message)
-          if (body.status) {
-              router.refresh()
-          }
+        setErrorMsg(body.message)
+        if (body.status) {
+          setModalVis(false)
+          router.refresh()
+        }
       }
-  } catch (error) {
+    } catch (error) {
       setErrorMsg(error)
-  }
+    }
   }
 
 
@@ -58,7 +60,7 @@ const AddTradeModal = ({ setModalVis }) => {
     <div className="z-40 text-black fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center ">
       <div className="bg-white py-10 px-5 md:px-20 rounded-xl flex flex-col items-center gap-4 max-h-[90%] overflow-y-auto w-full m-10 md:w-2/3 justify-between">
         <h1 className="text-lg font-bold">Add Trade</h1>
-
+        {errorMsg && <p className="text-red-500 font-medium">{errorMsg}</p>}
         <form className="w-full" onSubmit={submitTrade}>
           <div className="grid gap-6 md:grid-cols-2 mb-5">
 
