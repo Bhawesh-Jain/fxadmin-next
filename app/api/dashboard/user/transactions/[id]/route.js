@@ -18,7 +18,6 @@ export async function GET(request, { params }) {
     }
 
     return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
-
 }
 
 export async function PUT(request, { params }) {

@@ -24,17 +24,26 @@ const UserTransactions = async ({ params }) => {
         list = body.data
     }
 
-    return (
-        <div className="flex flex-col items-center px-2 pt-5">
-            <h2 className="text-2xl font-bold mt-16 md:mt-4 ">User Transactions</h2>
+    if (list.size > 0) {
+        return (
+            <div className="flex flex-col items-center px-2 pt-5">
+                <h2 className="text-2xl font-bold mt-16 md:mt-4 ">User Transactions</h2>
 
-            <div className="flex flex-col items-center overflow-y-auto w-full">
-                {
-                    list.map(item => (
-                        <Transaction key={item._id} item={item} />
-                    ))
-                }
+                <div className="flex flex-col items-center overflow-y-auto w-full">
+                    {
+                        list.map(item => (
+                            <Transaction key={item._id} item={item} />
+                        ))
+                    }
+                </div>
             </div>
+        )
+
+    }
+    else return (
+        <div className="flex flex-col items-center px-2 pt-5">
+            <h2 className="text-xl font-medium mt-16 md:mt-4 ">No Transactions for this User</h2>
+
         </div>
     )
 }

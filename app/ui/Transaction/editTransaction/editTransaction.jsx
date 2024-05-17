@@ -5,11 +5,15 @@ import { useRouter } from "next/navigation"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
-const EditTransactionForm = ({item}) => {
+const EditTransactionForm = ({ item }) => {
     const router = useRouter()
 
     const [errorMsg, setErrorMsg] = useState("");
 
+
+    const cancelEdit = async () => {
+        router.back();
+    }
     const handleForm = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -57,7 +61,7 @@ const EditTransactionForm = ({item}) => {
 
             <div className="p-4 w-full">
 
-                <form className="md:mx-20 mt-5"  onKeyDown={handleKeyDown} onSubmit={handleForm}>
+                <form className="md:mx-20 mt-5" onKeyDown={handleKeyDown} onSubmit={handleForm}>
                     <div className="grid gap-6 md:grid-cols-2 mb-5">
 
                         <div>
@@ -87,7 +91,11 @@ const EditTransactionForm = ({item}) => {
                         <textarea defaultValue={item.msg} type="text" name="msg" rows="4" id="msg" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="" required />
                     </div>
 
-                    <button type="submit" className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Submit</button>
+
+                    <div className="flex flex-col lg:flex-row gap-5 justify-between w-full">
+                        <button type="submit" className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Submit</button>
+                        <button type="button" onClick={cancelEdit} className="mt-6 text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Cancel</button>
+                    </div>
                 </form>
 
                 {errorMsg && errorMsg.length > 0 && <p className="text-red-500">{errorMsg}</p>}

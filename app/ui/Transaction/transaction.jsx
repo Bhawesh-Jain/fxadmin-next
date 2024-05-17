@@ -74,7 +74,7 @@ const Transaction = ({ item, id }) => {
                   <p className="my-1">Transaction Id: {item.transactionId}</p>
                   <p className="my-1">Status: {item.status}</p>
                   <div className="my-2">
-                     {item.createdAt}
+                     {new Date(item.createdAt).toLocaleString()}
                   </div>
                </div>
             </div>

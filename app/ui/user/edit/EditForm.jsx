@@ -56,6 +56,9 @@ const UserEditForm = ({ item }) => {
 
                 setErrorMsg(body.message)
 
+                if (body.status) {
+                    router.back()
+                }
                 
             }
 

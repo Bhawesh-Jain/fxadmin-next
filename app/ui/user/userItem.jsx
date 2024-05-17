@@ -24,7 +24,7 @@ const UserItem = ({ item }) => {
             <div className="flex flex-col md:flex-row justify-between">
                 <h2 className="font-medium text-base">{item.name}</h2>
 
-                {item.status === "Pending" && <h2 className="font-medium text-base text-red-500">{item.status}</h2>}
+                <h2 className={`font-medium text-base ${item.status === "Active" && "text-green-500"} ${item.status === "Pending" && "text-red-500"}`}>{item.status}</h2>
             </div>
             <p>{item.phone}</p>
             <p>{item.email}</p>
