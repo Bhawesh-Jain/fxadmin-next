@@ -4,10 +4,10 @@ import { useState } from "react"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
+const CloseTradeModal = ({ userId, setModalVis, tradeId, currentItem }) => {
 
-
-const EditTradeModal = ({ setModalVis, id, item }) => {
   const [errorMsg, setErrorMsg] = useState("");
+
 
   const close = () => {
     setModalVis(false)
@@ -25,21 +25,19 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
     }
 
     const rawFormData = {
-      userId: item.userId,
+      status: "CLOSE",
+      userId: userId,
       amount: formData.get('amount'),
       buy: formData.get('buy'),
-      status: formData.get('status'),
       quantity: formData.get('quantity'),
       sell: formData.get('sell'),
       profit: formData.get('profit'),
-      currency: formData.get('currency'),
-      type: "Edit",
-      prevProfit: item.profit,
+      type: "close",
       date: formData.get('date')
     }
 
     try {
-      const res = await fetch(`${baseUrl}/api/dashboard/user/trade?id=${item._id}`, {
+      const res = await fetch(`${baseUrl}/api/dashboard/user/trade?id=${tradeId}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json"
@@ -47,7 +45,6 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
         body: JSON.stringify(rawFormData),
       });
 
-      console.log(res);
       if (res.ok) {
         const body = await res.json();
 
@@ -65,59 +62,35 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
   return (
     <div className="z-40 text-black fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center ">
       <div className="bg-white py-10 px-5 md:px-20 rounded-xl flex flex-col items-center gap-4 max-h-[90%] overflow-y-auto w-full m-10 md:w-2/3 justify-between">
-        <h1 className="text-lg font-bold">Edit Trade</h1>
+        <h1 className="text-lg font-bold">Add Trade</h1>
         {errorMsg && <p className="text-red-500 font-medium">{errorMsg}</p>}
-
         <form className="w-full" onSubmit={submitTrade}>
           <div className="grid gap-6 md:grid-cols-2 mb-5">
 
             <div>
               <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900">Trade Amount</label>
               <input
-                defaultValue={item.amount}
-                type="text"
+                defaultValue={currentItem.amount}
+                type="amount"
                 name="amount"
                 id="amount"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
             </div>
 
             <div>
-              <label htmlFor="currency" className="block mb-2 text-sm font-medium text-gray-900">Currency</label>
-              <input
-                defaultValue={item.currency}
-                type="text"
-                name="currency"
-                id="currency"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
-            </div>
-
-            <div>
-              <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
-              <select
-                defaultValue={item.status}
-                id="status"
-                name="status"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
-                <option value="LIVE">LIVE</option>
-                <option value="CLOSE">CLOSE</option>
-              </select>
-            </div>
-
-            <div>
               <label htmlFor="buy" className="block mb-2 text-sm font-medium text-gray-900">Buy Price</label>
               <input
-                defaultValue={item.buy}
+                defaultValue={currentItem.buy}
                 type="number"
                 name="buy"
                 id="buy"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
             </div>
 
-
             <div>
               <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-900">Quantity</label>
               <input
-                defaultValue={item.quantity}
+                defaultValue={currentItem.quantity}
                 type="number"
                 name="quantity"
                 id="quantity"
@@ -127,7 +100,6 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
             <div>
               <label htmlFor="sell" className="block mb-2 text-sm font-medium text-gray-900">Sell Price</label>
               <input
-                defaultValue={item.sell}
                 type="number"
                 name="sell"
                 id="sell"
@@ -137,26 +109,24 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
             <div>
               <label htmlFor="profit" className="block mb-2 text-sm font-medium text-gray-900">Profit/Loss</label>
               <input
-                defaultValue={item.profit}
                 type="number"
                 name="profit"
-                id="profit"
                 required
+                id="profit"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
             </div>
 
             <div>
               <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900">Date</label>
               <input
+                defaultValue={currentItem.date}
                 type="text"
-                defaultValue={item.date}
                 name="date"
                 id="date"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="dd-mm-yyyy"
                 required />
             </div>
-
 
           </div>
 
@@ -181,4 +151,4 @@ const EditTradeModal = ({ setModalVis, id, item }) => {
   )
 }
 
-export default EditTradeModal
+export default CloseTradeModal

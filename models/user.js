@@ -23,6 +23,22 @@ const userSchema = new mongoose.Schema(
     address: String,
     nomineeName: String,
     nomineeRelation: String,
+    investmentAmount: {
+      type: String,
+      default: "0"
+    },
+    marketValue: {
+      type: String,
+      default: "0"
+    },
+    overallGain: {
+      type: String,
+      default: "0"
+    },
+    profit: {
+      type: String,
+      default: "0"
+    },
     status: {
       type: String,
       default: "Pending"

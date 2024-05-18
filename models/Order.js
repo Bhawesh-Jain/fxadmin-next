@@ -6,6 +6,10 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       default: "-"
     },
+    currency: {
+      type: String,
+      default: "USD"
+    },
     amount: {
       type: String,
       default: "-"
@@ -28,6 +32,10 @@ const OrderSchema = new mongoose.Schema(
     },
     userId: {
       type: String
+    },   
+    status: {
+      type: String,
+      default: "LIVE"
     },
   }, { timestamps: true }
 )

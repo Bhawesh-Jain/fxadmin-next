@@ -12,7 +12,7 @@ const UserItem = ({ item }) => {
     const handleDelete = async () => {
         const confirmed = confirm("Are you sure?")
         if (confirmed) {
-            const res = await fetch(`${baseUrl}/api/dashboard/user?id=${item._id}`, {
+            await fetch(`${baseUrl}/api/dashboard/user?id=${item._id}`, {
                 method: "DELETE"
             });
             router.refresh();
@@ -39,7 +39,7 @@ const UserItem = ({ item }) => {
                 </button>
                 <RedirectBtn link={`./dashboard/user/transactions/${item._id}`} color="blue-500" text="Transactions" width="" />
                 <RedirectBtn link={`./dashboard/user/trade/${item._id}`} color="red-500" text="Trades" width="" />
-                <PrimaryBtn color="green" text="Investement" width="" />
+                <RedirectBtn link={`./dashboard/user/investment/${item._id}`} color="green-500" text="Investement" width="" />
             </div>
         </div>
     )

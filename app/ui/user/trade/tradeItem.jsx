@@ -6,12 +6,18 @@ import EditTradeModal from "./editTradeModal/editTradeModal";
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
 
-const TradeItem = ({ item, setRefresh, setEditModal, setCurrentItem }) => {
+const TradeItem = ({ item, setRefresh, setEditModal, setCloseModal, setCurrentItem }) => {
 
     const openModal = () => {
         setCurrentItem(item)
 
         setEditModal(true)
+    }
+
+    const closeTrade = () => {
+        setCurrentItem(item)
+
+        setCloseModal(true)
     }
 
     const deleteItem = async () => {
@@ -37,6 +43,14 @@ const TradeItem = ({ item, setRefresh, setEditModal, setCurrentItem }) => {
             <tr className="border-b">
                 <td className="px-6 py-3 border-r">
                     {item.date}
+                </td>
+                <td className="px-6 py-3 border-r">
+                    {item.currency}
+                </td>
+                <td className="px-6 py-3 border-r text-red-500">
+                    {item.status === "LIVE" && <button onClick={closeTrade} className="py-2 px-4 bg-green-500 text-white rounded">{item.status}</button> || 
+                    item.status
+                    }
                 </td>
                 <td className="px-6 py-3 border-r">
                     {item.amount}

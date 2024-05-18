@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
@@ -8,8 +7,6 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 const AddTradeModal = ({ userId, setModalVis }) => {
 
   const [errorMsg, setErrorMsg] = useState("");
-
-  const router = useRouter()
 
 
   const close = () => {
@@ -21,13 +18,22 @@ const AddTradeModal = ({ userId, setModalVis }) => {
 
     const formData = new FormData(event.target);
 
+    const datePattern = /^\d{2}-\d{2}-\d{4}$/;
+
+    if (!datePattern.test(formData.get('date'))) {
+      alert('Invalid date format. Please enter the date in DD-MM-YYYY format.');
+      return
+    }
+
+
     const rawFormData = {
       userId: userId,
       amount: formData.get('amount'),
       buy: formData.get('buy'),
       quantity: formData.get('quantity'),
-      sell: formData.get('sell'),
-      profit: formData.get('profit'),
+      currency: formData.get('currency'),
+      // sell: formData.get('sell'),
+      // profit: formData.get('profit'),
       date: formData.get('date')
     }
 
@@ -47,7 +53,6 @@ const AddTradeModal = ({ userId, setModalVis }) => {
         setErrorMsg(body.message)
         if (body.status) {
           setModalVis(false)
-          router.refresh()
         }
       }
     } catch (error) {
@@ -74,6 +79,15 @@ const AddTradeModal = ({ userId, setModalVis }) => {
             </div>
 
             <div>
+              <label htmlFor="currency" className="block mb-2 text-sm font-medium text-gray-900">Currency</label>
+              <input
+                type="text"
+                name="currency"
+                id="currency"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
+            </div>
+
+            <div>
               <label htmlFor="buy" className="block mb-2 text-sm font-medium text-gray-900">Buy Price</label>
               <input
                 type="number"
@@ -91,14 +105,14 @@ const AddTradeModal = ({ userId, setModalVis }) => {
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="sell" className="block mb-2 text-sm font-medium text-gray-900">Sell Price</label>
               <input
                 type="number"
                 name="sell"
                 id="sell"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
-            </div>
+            </div> 
 
             <div>
               <label htmlFor="profit" className="block mb-2 text-sm font-medium text-gray-900">Profit/Loss</label>
@@ -107,7 +121,7 @@ const AddTradeModal = ({ userId, setModalVis }) => {
                 name="profit"
                 id="profit"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " />
-            </div>
+            </div>*/}
 
             <div>
               <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900">Date</label>
