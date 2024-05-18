@@ -97,7 +97,6 @@ const UserEditForm = ({ item }) => {
                 }
             }
         } catch (error) {
-            console.log(error);
             setErrorMsg(error)
         }
     }

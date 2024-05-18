@@ -19,12 +19,13 @@ const UserTransactions = async ({ params }) => {
     let list = []
 
     if (res.ok) {
-        let body = await res.json()
+        var body = await res.json()
+
 
         list = body.data
     }
 
-    if (list.size > 0) {
+    if (list.length > 0) {
         return (
             <div className="flex flex-col items-center px-2 pt-5">
                 <h2 className="text-2xl font-bold mt-16 md:mt-4 ">User Transactions</h2>

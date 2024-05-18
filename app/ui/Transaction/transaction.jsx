@@ -2,12 +2,16 @@
 import { MdCallReceived } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import RedirectBtn from "../Skeleton/RedirectBtn/RedirectBtn";
+import { useEffect, useState } from "react";
+import EditTransactionModal from "./editTransactionModal/editTransactionModal";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
 const Transaction = ({ item, id }) => {
 
    const router = useRouter();
+
+   const [editModal, setEditModal] = useState(false);
 
    const handleAccept = async () => {
       var status = "COMPLETED"
@@ -25,40 +29,46 @@ const Transaction = ({ item, id }) => {
       const rawFormData = {
          status: status,
          id: item._id
-     }
-     try {
+      }
+      try {
          const res = await fetch(`${baseUrl}/api/dashboard/user/transactions/${item.userId}`, {
-             method: "PUT",
-             headers: {
-                 "Content-type": "application/json"
-             },
-             body: JSON.stringify(rawFormData),
+            method: "PUT",
+            headers: {
+               "Content-type": "application/json"
+            },
+            body: JSON.stringify(rawFormData),
          });
 
          if (res.ok) {
-             const body = await res.json();
+            const body = await res.json();
 
-             console.log(body);
-
-             if (body.status) {
-                 router.refresh()
-             }
+            if (body.status) {
+               router.refresh()
+            }
          }
-     } catch (error) {
+      } catch (error) {
          console.log(error);
-     }
+      }
    }
 
    const handleDelete = async () => {
       const confirmed = confirm("Are you sure? ")
-      
+
       if (confirmed) {
          const res = await fetch(`${baseUrl}/api/dashboard/user/transactions?id=${item._id}`, {
-             method: "DELETE"
+            method: "DELETE"
          });
          router.refresh();
-     }
-  }
+      }
+   }
+
+   const openEdit = () => {
+      setEditModal(true)
+   }
+
+   useEffect(() => {
+      router.refresh()
+   }, [editModal]);
 
 
    return (
@@ -80,7 +90,7 @@ const Transaction = ({ item, id }) => {
 
             <div className="flex flex-col justify-end items-end z-20">
                <span className="text-center md:text-start">Transaction Amount:<p className="font-medium text-center m-1">{item.amount}</p></span>
-               <span className={`m-auto mx-auto bg-blue-500 rounded-lg ${item.type === "Paid" && "rotate-180"}`}>
+               <span className={`m-auto mx-auto bg-blue-500 rounded-lg ${item.type !== "Deposit" && "rotate-180"}`}>
                   <MdCallReceived size={60} className="filter p-4 fill-white" />
                </span>
             </div>
@@ -101,13 +111,15 @@ const Transaction = ({ item, id }) => {
          {item.status !== "PENDING" &&
             <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
                <div className="hidden w-1/4"></div>
-               <RedirectBtn link={`/dashboard/transactions/${item._id}`} text="Edit" color="blue-500" width="full" />
+               <button onClick={openEdit} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-blue-500`}>
+                  Edit
+               </button>
                <button onClick={handleDelete} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
-               Delete
+                  Delete
                </button>
             </div>
          }
-
+         {editModal && <EditTransactionModal setModalVis={setEditModal} item={item} />}
 
       </div>
    )
