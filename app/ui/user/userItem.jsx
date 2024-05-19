@@ -1,6 +1,5 @@
 "use client"
 import { useRouter } from "next/navigation"
-import PrimaryBtn from "../Skeleton/PrimaryBtn/PrimaryBtn"
 import RedirectBtn from "../Skeleton/RedirectBtn/RedirectBtn"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
@@ -33,7 +32,7 @@ const UserItem = ({ item }) => {
                 <div className="hidden bg-green-500 "></div>
                 <div className="hidden bg-blue-500 "></div>
                 <RedirectBtn link={`./dashboard/user/edit/${item._id}`} color="green-500" text="View" width="" />
-                <PrimaryBtn color="blue" text="Add loan" width="" />
+                <RedirectBtn link={`./dashboard/user/loan/${item._id}`} color="blue-500" text="Add loan" width="" />
                 <button onClick={handleDelete} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} bg-red-500`}>
                     Delete
                 </button>

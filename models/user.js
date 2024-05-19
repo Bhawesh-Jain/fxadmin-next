@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "0"
     },
+    loanAmount: {
+      type: String,
+      default: "0"
+    },
     marketValue: {
       type: String,
       default: "0"
