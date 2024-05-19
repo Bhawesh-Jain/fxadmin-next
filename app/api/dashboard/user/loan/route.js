@@ -53,13 +53,22 @@ export async function PATCH(request) {
   var status = false
 
 
-
-  var data = await Loan.findByIdAndUpdate(id,
-    {
-      status: loanStatus,
-      msg: msg,
-      amount: amount
-    });
+  if (id) {
+    var data = await Loan.findByIdAndUpdate(id,
+      {
+        status: loanStatus,
+        msg: msg,
+        amount: amount
+      });
+  } else {
+    var data = await Loan.create(id,
+      {
+        status: loanStatus,
+        msg: msg,
+        userId: userId,
+        amount: amount
+      });
+  }
 
   if (data) {
     message = "Loan Updated"

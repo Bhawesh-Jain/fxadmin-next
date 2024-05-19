@@ -12,6 +12,16 @@ const LoanItem = ({ item, userId }) => {
   const router = useRouter()
   const [acceptLoan, setAcceptLoan] = useState(false);
 
+  const getDate = (date) => {
+    const dateItem= new Date(date)
+    var month = dateItem.getMonth() + 1
+
+    if (month < 10) {
+       month = "0" + month
+    }
+
+    return dateItem.getDate() + "-" + month + "-" + dateItem.getFullYear() + " " + dateItem.toLocaleTimeString()  
+ }
   const handleReject = () => {
     var status = "Rejected"
 
@@ -52,7 +62,7 @@ const LoanItem = ({ item, userId }) => {
 
   return (
     <div className="w-full py-2 text-xs md:text-sm border-b-2 border-gray-100 flex flex-col lg:flex-row lg:gap-14 gap-4 justify-between">
-      <div className="flex flex-col w-full gap-1 mb-3 p-3">
+      <div className="flex flex-col w-full gap-1 p-3">
         <div className="flex flex-col md:flex-row justify-between">
           <h2 className="font-medium text-base">{item.msg}</h2>
 
@@ -60,6 +70,7 @@ const LoanItem = ({ item, userId }) => {
         </div>
         <p>{item.userId}</p>
         <p>{item.amount}</p>
+        <p>{getDate(item.createdAt)}</p>
 
       </div>
 

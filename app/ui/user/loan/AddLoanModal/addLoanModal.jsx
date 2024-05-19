@@ -16,12 +16,17 @@ const AddLoanModal = ({ setModalVis, item, userId }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
+    let loanId = null
+
+    if (item) {
+      loanId = item._id
+    }
 
     const rawFormData = {
       msg: formData.get('msg'),
       amount: formData.get('amount'),
       userId: userId,
-      id: item._id,
+      id: loanId,
       loanStatus: "Offered"
     }
 
