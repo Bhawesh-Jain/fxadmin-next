@@ -63,7 +63,7 @@ const LoanItem = ({ item, userId }) => {
 
       </div>
 
-      {item.status !== "Rejected" || "Accepted" &&
+      {item.status !== "Accepted" && item.status !== "Rejected" &&
         <div className="flex w-full lg:w-1/4 flex-row lg:flex-col justify-evenly gap-3 items-center text-sm ">
           <button onClick={handleAccept} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-green-500`}>
             Accept
@@ -73,7 +73,7 @@ const LoanItem = ({ item, userId }) => {
           </button>
         </div>
       }
-      {acceptLoan && <AddLoanModal setModalVis={setAcceptLoan} item={item} userId={userId}/>}
+      {acceptLoan && <AddLoanModal setModalVis={setAcceptLoan} item={item} userId={userId} />}
 
 
     </div>

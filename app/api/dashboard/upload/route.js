@@ -21,7 +21,7 @@ export async function GET() {
 }
 
 
-export async function PUT(request, { params }) {
+export async function POST(request, { params }) {
   const req = await request.json();
 
   await connectMongoDb()

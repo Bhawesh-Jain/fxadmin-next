@@ -28,14 +28,13 @@ const UploadQrForm = ({ paymentItem }) => {
   }
 
   const updateQr = async () => {
-    console.log(qr);
     const rawFormData = {
       upiId: upiId,
       qr: qr
     }
     try {
       const res = await fetch(`${baseUrl}/api/dashboard/upload`, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-type": "application/json"
         },

@@ -10,7 +10,7 @@ export async function GET(request) {
   var message = "Request Failed"
   var status = false
 
-  var data = await Loan.find({ userId: id });
+  var data = await Loan.find({ userId: id }).sort({ createdAt: -1 });
 
   if (data) {
     message = "Found Loan"

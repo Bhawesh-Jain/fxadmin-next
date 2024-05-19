@@ -25,6 +25,7 @@ const UserInvestmentForm = ({ item }) => {
       investmentAmount: formData.get('investmentAmount'),
       marketValue: formData.get('marketValue'),
       overallGain: formData.get('overallGain'),
+      loanAmount: formData.get('loanAmount'),
       profit: formData.get('profit')
     }
 
@@ -85,6 +86,17 @@ const UserInvestmentForm = ({ item }) => {
                     type="number"
                     name="marketValue"
                     id="marketValue"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                    required />
+                </div>
+
+                <div className="w-full">
+                  <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Loan Amount</label>
+                  <input
+                    defaultValue={item.loanAmount}
+                    type="number"
+                    name="loanAmount"
+                    id="loanAmount"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required />
                 </div>
