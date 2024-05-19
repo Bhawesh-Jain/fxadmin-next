@@ -16,7 +16,26 @@ const Transaction = ({ item, id }) => {
    const handleAccept = async () => {
       var status = "COMPLETED"
 
-      updateStatus(status)
+   
+      try {
+         const res = await fetch(`${baseUrl}/api/dashboard/transaction/${item._id}?status=${status}`, {
+            method: "PATCH",
+            headers: {
+               "Content-type": "application/json"
+            },
+            body: JSON.stringify(item),
+         });
+
+         if (res.ok) {
+            const body = await res.json();
+
+            if (body.status) {
+               router.refresh()
+            }
+         }
+      } catch (error) {
+         console.log(error);
+      }
    }
 
    const handleReject = async () => {
@@ -62,12 +81,25 @@ const Transaction = ({ item, id }) => {
       }
    }
 
+   const getDate = (date) => {
+      const dateItem = new Date(date)
+      var month = dateItem.getMonth() + 1
+
+      if (month < 10) {
+         month = "0" + month
+      }
+
+      return dateItem.getDate() + "-" + month + "-" + dateItem.getFullYear()
+   }
+
    const openEdit = () => {
       setEditModal(true)
    }
 
    useEffect(() => {
-      router.refresh()
+      if (!editModal) {
+         router.refresh()
+      }
    }, [editModal]);
 
 
@@ -83,7 +115,7 @@ const Transaction = ({ item, id }) => {
                   <p className="my-1">Transaction Id: {item.transactionId}</p>
                   <p className="my-1">Status: {item.status}</p>
                   <div className="my-2">
-                     {new Date(item.createdAt).toLocaleString()}
+                     {getDate(item.createdAt)}
                   </div>
                </div>
             </div>

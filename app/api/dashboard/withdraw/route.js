@@ -8,7 +8,7 @@ export async function GET() {
     var message = "No Withdraw Found!"
     var status = false
 
-    var data = await Withdraw.find();
+    var data = await Withdraw.find({status: "PENDING"}).sort({ createdAt: -1 });
     // var data = null
 
     if (data) {

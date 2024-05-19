@@ -8,7 +8,7 @@ export async function GET() {
     var message = "No Transactions Found!"
     var status = false
 
-    var data = await Transaction.find();
+    var data = await Transaction.find().sort({ createdAt: -1 });
     // var data = null
 
     if (data) {

@@ -31,7 +31,6 @@ export async function PUT(request, { params }) {
     const filter = { _id: req["id"] };
     const update = { status: req["status"] };
 
-    console.log(req, filter, update);
 
     var message = "No Transactions Found!"
     var status = false

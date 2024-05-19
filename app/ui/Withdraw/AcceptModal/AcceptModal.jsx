@@ -19,7 +19,7 @@ const AcceptModal = ({ setModalVis, item}) => {
 
 
     const rawFormData = {
-      transationId: formData.get('transactionId'),
+      transactionId: formData.get('transactionId'),
       amount: item.amount,
       userId: item.userId,
       type: "Withdraw",
@@ -28,8 +28,8 @@ const AcceptModal = ({ setModalVis, item}) => {
     }
 
     try {
-      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item._id}?status=COMPLETED`, {
-        method: "PUT",
+      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item._id}?status=COMPLETED&id=${item._id}`, {
+        method: "PATCH",
         headers: {
           "Content-type": "application/json"
         },
