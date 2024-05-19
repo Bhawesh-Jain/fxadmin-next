@@ -1,5 +1,3 @@
-"use client"
-import Transaction from "@/app/ui/Transaction/transaction";
 import WithdrawItem from "@/app/ui/Withdraw/withdrawItem";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
