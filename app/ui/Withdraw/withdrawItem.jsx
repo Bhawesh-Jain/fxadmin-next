@@ -34,7 +34,7 @@ const WithdrawItem = ({ item, id }) => {
        month = "0" + month
     }
 
-    return dateItem.getDate() + "-" + month + "-" + dateItem.getFullYear()
+    return dateItem.getDate() + "-" + month + "-" + dateItem.getFullYear() + " " + dateItem.toLocaleTimeString()
  }
 
   const updateStatus = async () => {
