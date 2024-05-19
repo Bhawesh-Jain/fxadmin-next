@@ -3,7 +3,7 @@ import WithdrawItem from "@/app/ui/Withdraw/withdrawItem";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
-const Withdraw = async () => {
+const Withdraw = async () => { 
 
     const res = await fetch(`${baseUrl}/api/dashboard/withdraw`, {
         method: "GET",
