@@ -76,3 +76,21 @@ export async function PATCH(request, { params }) {
   return NextResponse.json({ status: status, message: message }, { status: 200 })
 
 }
+
+
+export async function GET() {
+  await connectMongoDb()
+
+  var message = "No Withdraw Found!"
+  var status = false
+
+  var data = await Withdraw.find({status: "PENDING"}).sort({ createdAt: -1 });
+  // var data = null
+
+  if (data) {
+      message = "Found Withdraw"
+      status = true
+  }
+
+  return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
+}
