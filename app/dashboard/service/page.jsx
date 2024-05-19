@@ -27,7 +27,7 @@ const Services = async () => {
 
             <Link href="../dashboard/service/add"><PrimaryBtn color={"blue"} text={"Add New"} /></Link>
 
-            <div className="grid grid-cols-2 items-center overflow-y-auto w-full mt-5">
+            <div className="grid md:grid-cols-2 items-center overflow-y-auto w-full mt-5">
                 {
                     list.map(item => (
                         <ServiceItem key={item._id} item={item} />

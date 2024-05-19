@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-// import SavedIcon from "../savedIcon/SavedIcon";
+import SavedIcon from "../savedIcon/SavedIcon";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
@@ -22,9 +22,9 @@ const ServiceItem = ({ item }) => {
 
     return (
         <div className="text-black m-3 p-3 h-full border justify-between border-solid border-gray-300 rounded-lg bg-white flex flex-col items-center">
-            {/* <div className="mt-5">
-                <SavedIcon library={library} iconName={iconName} />
-            </div> */}
+            <div className="mt-5">
+                <SavedIcon library={library} icon={iconName} />
+            </div>
 
             <h1 className="text-center font-bold mt-8 mb-4 text-lg">{item.name}</h1>
 

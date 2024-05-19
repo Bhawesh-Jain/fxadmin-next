@@ -37,6 +37,11 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
             link: "/dashboard/about"
         },
         {
+            title: "Upload Qr",
+            icon: icons.MdInfo,
+            link: "/dashboard/upload"
+        },
+        {
             title: "Terms & Conditions",
             icon: icons.MdPanoramaPhotosphereSelect,
             link: "/dashboard/terms"
