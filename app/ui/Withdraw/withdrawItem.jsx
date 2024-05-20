@@ -10,6 +10,7 @@ const WithdrawItem = ({ item, id }) => {
 
   const router = useRouter();
   const [acceptModal, setAcceptModal] = useState();
+  const [btn, setBtn] = useState(true);
 
   useEffect(() => {
     if (!acceptModal) {
@@ -27,18 +28,18 @@ const WithdrawItem = ({ item, id }) => {
   }
 
   const getDate = (date) => {
-    const dateItem= new Date(date)
+    const dateItem = new Date(date)
     var month = dateItem.getMonth() + 1
 
     if (month < 10) {
-       month = "0" + month
+      month = "0" + month
     }
 
     return dateItem.getDate() + "-" + month + "-" + dateItem.getFullYear() + " " + dateItem.toLocaleTimeString()
- }
+  }
 
   const updateStatus = async () => {
-
+    setBtn(false)
     const rawFormData = {
       transactionId: 'Withdraw Rejected',
       amount: item.amount,
@@ -63,9 +64,14 @@ const WithdrawItem = ({ item, id }) => {
         if (body.status) {
           router.refresh()
         }
+      } else {
+        setBtn(true)
+
       }
     } catch (error) {
       console.log(error);
+      setBtn(true)
+
     }
   }
 
@@ -101,7 +107,7 @@ const WithdrawItem = ({ item, id }) => {
             <button onClick={handleAccept} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-green-500`}>
               Accept
             </button>
-            <button onClick={handleReject} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
+            btn && <button onClick={handleReject} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
               Reject
             </button>
           </div>
