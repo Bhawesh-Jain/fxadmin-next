@@ -10,6 +10,11 @@ export async function PUT(request, { params }) {
   const id = request.nextUrl.searchParams.get("id")
   const res = await request.json()
 
+
+  console.log(wStatus);
+  console.log(id);
+  console.log(res);
+
   await connectMongoDb()
 
   var message = "Request Failed"
@@ -17,9 +22,11 @@ export async function PUT(request, { params }) {
 
   var transaction = await Transaction.create(res)
 
+  console.log(transaction);
   if (transaction) {
 
     var data = await Withdraw.findByIdAndUpdate(id, { status: wStatus })
+    console.log(data);
 
     if (data) {
       message = "Update Succesful"
@@ -38,6 +45,11 @@ export async function PATCH(request, { params }) {
 
   const userId = res["userId"]
 
+  console.log(wStatus);
+  console.log(id);
+  console.log(res);
+  console.log(userId);
+
   await connectMongoDb()
 
   var message = "Request Failed"
@@ -45,6 +57,7 @@ export async function PATCH(request, { params }) {
 
   var user = await User.findById(userId)
 
+  console.log(user);
   if (user) {
 
     var amount = res["amount"]
@@ -57,12 +70,15 @@ export async function PATCH(request, { params }) {
       marketValue: marketValue
     })
 
+    console.log(userUpdate);
     if (userUpdate) {
       var transaction = await Transaction.create(res)
 
+      console.log(transaction);
       if (transaction) {
 
         var data = await Withdraw.findByIdAndUpdate(id, { status: wStatus })
+        console.log(data);
 
         if (data) {
           message = "Update Succesful"
@@ -84,12 +100,12 @@ export async function GET() {
   var message = "No Withdraw Found!"
   var status = false
 
-  var data = await Withdraw.find({status: "PENDING"}).sort({ createdAt: -1 });
+  var data = await Withdraw.find({ status: "PENDING" }).sort({ createdAt: -1 });
   // var data = null
 
   if (data) {
-      message = "Found Withdraw"
-      status = true
+    message = "Found Withdraw"
+    status = true
   }
 
   return NextResponse.json({ status: status, message: message, data: data }, { status: 200 })
