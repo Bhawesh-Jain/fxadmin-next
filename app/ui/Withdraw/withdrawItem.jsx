@@ -107,9 +107,9 @@ const WithdrawItem = ({ item, id }) => {
             <button onClick={handleAccept} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-green-500`}>
               Accept
             </button>
-            btn && <button onClick={handleReject} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
+            {btn && <button onClick={handleReject} className={`${"p-3 select-none rounded text-white text-center hover:cursor-pointer"} w-full bg-red-500`}>
               Reject
-            </button>
+            </button>}
           </div>
         }
 
