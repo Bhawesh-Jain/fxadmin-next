@@ -5,7 +5,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"
 
 const Transactions = async () => {
 
-    const res = await fetch(`${baseUrl}/api/dashboard/transaction`, {
+    const res = await fetch(`${baseUrl}/api/dashboard/transaction/all`, {
         method: "GET",
         cache: "no-store",
         headers: {

@@ -6,12 +6,16 @@ import { NextResponse } from "next/server"
 export async function GET(request, { params }) {
     const { id } = params
 
+
     await connectMongoDb()
 
     var message = "Request Failed"
     var status = false
-
-    var data = await Transaction.findById(id);
+    if (id === "all") {
+        var data = await Transaction.find().sort({ createdAt: -1 });
+    }
+    else
+        var data = await Transaction.findById(id);
 
     if (data) {
         message = "Found Transaction"
