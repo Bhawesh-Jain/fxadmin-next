@@ -45,10 +45,11 @@ const WithdrawItem = ({ item, id }) => {
       userId: item.userId,
       type: "Withdraw",
       msg: 'Withdraw Request rejected by accounts team',
-      status: "REJECTED"
+      status: "REJECTED",
+      itemId: item._id
     }
     try {
-      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item.userId}?status=REJECTED&id=${item._id}`, {
+      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item.userId}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json"

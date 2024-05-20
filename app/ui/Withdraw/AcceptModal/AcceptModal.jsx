@@ -28,7 +28,7 @@ const AcceptModal = ({ setModalVis, item}) => {
     }
 
     try {
-      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item._id}?status=COMPLETED&id=${item._id}`, {
+      const res = await fetch(`${baseUrl}/api/dashboard/withdraw/${item._id}`, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json"

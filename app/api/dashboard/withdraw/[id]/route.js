@@ -6,10 +6,10 @@ import { NextResponse } from "next/server"
 
 
 export async function PUT(request, { params }) {
-  const wStatus = request.nextUrl.searchParams.get("status")
-  const id = request.nextUrl.searchParams.get("id")
   const res = await request.json()
-
+  
+  const wStatus = res["status"]
+  const id = res["itemId"]
 
   console.log(wStatus);
   console.log(id);
@@ -39,10 +39,10 @@ export async function PUT(request, { params }) {
 }
 
 export async function PATCH(request, { params }) {
-  const wStatus = request.nextUrl.searchParams.get("status")
-  const id = request.nextUrl.searchParams.get("id")
   const res = await request.json()
-
+  
+  const wStatus =  res["status"]
+  const {id} = params
   const userId = res["userId"]
 
   console.log(wStatus);
