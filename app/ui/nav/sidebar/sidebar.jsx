@@ -27,6 +27,11 @@ const Sidebar = ({openMenu = false, setOpenMenu}) => {
             link: "/dashboard/contact"
         },
         {
+            title: "Slider",
+            icon: icons.MdIndeterminateCheckBox,
+            link: "/dashboard/slide"
+        },
+        {
             title: "Footer",
             icon: icons.MdHourglassBottom,
             link: "/dashboard/footer"
